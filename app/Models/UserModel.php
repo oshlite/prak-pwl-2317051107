@@ -8,11 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class UserModel extends Model
 {
     use HasFactory;
-    protected $table = 'user';
-    protected $guarded = ['id'];   
+
+    protected $table = 'users';
+    protected $guarded = ['id'];
 
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
+
+    public function getUser(){
+        return $this->select('users.*', 'kelas.nama_kelas')
+                    ->join('kelas', 'kelas.id', '=', 'users.kelas_id')
+                    ->distinct()
+                    ->get();
+    }
+    
 }

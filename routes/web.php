@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MataKuliahController; // Tambahan dari gambar
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,19 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::view('/profile', 'profile');
-
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/profile/{nama}/{npm}/{kelas}', [ProfileController::class, 'profile']);
+
+// Routing ke ProfileController
+Route::get('/profile', [ProfileController::class, 'profile']);
+
+// Routing untuk UserController
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/user', [UserController::class, 'store'])->name('user.store');
+
+// Routing untuk MataKuliahController (Tambahan dari gambar)
+Route::get('/matakuliah', [MataKuliahController::class, 'index']);
+Route::get('/matakuliah/create', [MataKuliahController::class, 'create'])->name('matakuliah.create');
+Route::post('/matakuliah', [MataKuliahController::class, 'store'])->name('matakuliah.store');
