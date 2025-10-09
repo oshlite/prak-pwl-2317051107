@@ -40,6 +40,6 @@ class UserController extends Controller
             'kelas_id' => $request->input('kelas_id')
         ]);
 
-        return redirect()->to('/user');
+        return redirect()->route('daftaruser.index');
     }
 }

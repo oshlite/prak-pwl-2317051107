@@ -3,17 +3,18 @@
 @section('content')
 <div class="container">
     <h1>Daftar Mata Kuliah</h1>
-    <a href="{{ route('matakuliah.create') }}">Buat Mata Kuliah Baru</a>
-    <table>
+    <a href="{{ route('matakuliah.create') }}">Tambah Mata Kuliah Baru</a>
+    <br><br>
+
+    <table border="1" cellpadding="10" cellspacing="0">
         <thead>
             <tr>
                 <td>ID</td>
                 <td>NAMA MATA KULIAH</td>
-                <td>SKS</td>
+                <td>JUMLAH SKS</td>
             </tr>
         </thead>
         <tbody>
-            {{-- PERBAIKAN: Ubah $matakuliah menjadi $mks --}}
             @foreach ($mks as $mk)
                 <tr>
                     <td>{{ $mk->id }}</td>

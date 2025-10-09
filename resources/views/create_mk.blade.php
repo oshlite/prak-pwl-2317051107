@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Buat Mata Kuliah Baru</h1>
+    <h1>Buat Mata Kuliah Baru</h1><br>
 
     <form action="{{ route('matakuliah.store') }}" method="POST">
         @csrf
@@ -13,7 +13,7 @@
         <label for="sks">SKS:</label><br>
         <input type="number" id="sks" name="sks" required><br><br>
 
-        <button type="submit">Submit</button>
+        <button type="submit">SUBMIT!</button>
     </form>
 </div>
 @endsection

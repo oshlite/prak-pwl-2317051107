@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MataKuliah; // Mengimpor model MataKuliah
-
+use App\Models\MataKuliah;
 class MataKuliahController extends Controller
 {
-    /**
-     * Menampilkan daftar semua mata kuliah.
-     */
+
+    // Menampilkan daftar semua mata kuliah.
     public function index()
     {
         $data = [
@@ -19,17 +17,13 @@ class MataKuliahController extends Controller
         return view('list_mk', $data);
     }
 
-    /**
-     * Menampilkan form untuk membuat mata kuliah baru.
-     */
+    // Menampilkan form untuk membuat mata kuliah baru.
     public function create()
     {
         return view('create_mk', ['title' => 'Create Mata Kuliah']);
     }
 
-    /**
-     * Menyimpan data mata kuliah baru ke database.
-     */
+    // Menyimpan data mata kuliah baru ke database.
     public function store(Request $request)
     {
         // 1. Tambahkan Validasi Data Input

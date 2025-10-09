@@ -1,10 +1,8 @@
-<div class="bg-pink-200 p-4 text-left flex justify-between items-center">
-    <div>
-        <a href="{{ route('user.index') }}" class="text-white font-bold bg-pink-500 px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300">Daftar User</a>
-        <a href="{{ route('user.create') }}" class="text-white font-bold bg-pink-500 px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300">Tambah User</a>
+<div class="spongebob-header p-4 text-left flex justify-between items-center">
+    <div class="flex items-center gap-3">
+        <div class="text-2xl font-extrabold">🧽 SpongeBob SquarePants 🧽</div>
+        <a href="{{ route('daftaruser.index') }}" class="btn-sb font-bold px-4 py-2 rounded-md hover:opacity-90 transition duration-200">Daftar User</a>
+        <a href="{{ route('user.create') }}" class="btn-sb font-bold px-4 py-2 rounded-md hover:opacity-90 transition duration-200">Tambah User</a>
     </div>
-    <div>
-        <img src="{{asset('img/oryza.png')}}" alt="Profile Photo" class="h-10 w-10 rounded-full inline-block ml-4">
-    </div>
-
+    <div class="text-sm italic">Bikini Bottom Limited Edition</div>
 </div>
