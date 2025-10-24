@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+
 
 class UserController extends Controller
 {
@@ -18,14 +20,27 @@ class UserController extends Controller
     }
 
     public function create()
-    {
-        $kelas = $this->kelasModel->getKelas();
-        $data = [
-            'title' => 'Create User',
-            'kelas' => $kelas,
-        ];
-        return view('create_user', $data);
+{
+    $kelas = Kelas::all();
+
+    foreach ($kelas as $kelasItem) {
+        if ($kelasItem && !empty($kelasItem->nama_kelas)) {
+            try {
+                $decryptedName = Crypt::decryptString($kelasItem->nama_kelas);
+                $kelasItem->nama_kelas = $decryptedName;
+            } catch (DecryptException $e) {
+                Log::error(
+                    'Gagal dekripsi nama_kelas (ID: ' . $kelasItem->id . ') saat memuat form create user',
+                    ['error' => $e->getMessage()]
+                );
+
+                $kelasItem->nama_kelas = '[Data Kelas Rusak]';
+            }
+        }
     }
+
+    return view('create_user', ['kelas' => $kelas]);
+}
 
     public function store(Request $request)
     {
@@ -45,13 +60,29 @@ class UserController extends Controller
     }
 
     public function index()
-    {
-        $data = [
-            'title' => 'List Users',
-            'users' => $this->userModel->getUser(),
-        ];
-        return view('list_user', $data);
+{
+    $users = Pengguna::with('kelas')->get();
+    $title = 'test';
+
+    foreach ($users as $user) {
+        if ($user->kelas && !empty($user->kelas->nama_kelas)) {
+            try {
+                $decryptedName = Crypt::decryptString($user->kelas->nama_kelas);
+                $user->kelas->nama_kelas = $decryptedName;
+            } catch (DecryptException $e) {
+                Log::error(
+                    'Gagal dekripsi nama_kelas (ID: ' . $user->kelas->id . ') untuk user: ' . $user->id,
+                    ['error' => $e->getMessage()]
+                );
+
+                $user->kelas->nama_kelas = '[Data Kelas Rusak]';
+            }
+        }
     }
+
+    return view('list_user', compact('users', 'title'));
+}
+
 
     public function edit($id)
     {
